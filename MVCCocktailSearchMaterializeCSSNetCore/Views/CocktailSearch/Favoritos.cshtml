@@ -1,0 +1,394 @@
+﻿
+@{
+    ViewData["Title"] = "Favoritos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Favoritos</h2>
+
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var Favoritos = [];
+
+        if (localStorage.Favoritos) {
+            //Si existe en el storage
+            //convert json string to javascript object
+            Favoritos = JSON.parse(localStorage.getItem("Favoritos"))
+
+
+
+            //console.log('Ya existen, estos favoritos');
+            //console.log(Favoritos);
+
+            var filas = Math.floor(Favoritos.length / 4);
+            var residuo = Favoritos.length % 4;
+
+            for (fila = 1; fila <= filas; fila++) {
+
+                jQuery('<div>', {
+                    id: 'row' + fila,
+                    class: 'row',
+                    //title: 'now this div has a title!'
+                    //   }).appendTo('#containerBodyFromLayout');
+                }).insertBefore('#footer');
+
+
+                for (imagen = 1; imagen <= 4; imagen++) {
+
+                    var imagenActual = (fila - 1) * 4 + imagen;
+
+                    jQuery('<div>', {
+                        id: 'cocktail' + imagenActual,
+                        class: 'col s12 m3'
+                    }).appendTo('#row' + fila);
+
+                    jQuery('<div>', {
+                        id: 'card' + imagenActual,
+                        class: 'card small'
+                    }).appendTo('#cocktail' + imagenActual);
+                    //$("#center").append(txt1, txt2, txt3);
+
+                    //var div = $("#card" + imagenActual);
+
+                    //div.attr("style", "height:200px;");
+
+                    jQuery('<div>', {
+                        id: 'card-image' + imagenActual,
+                        class: 'card-image'
+                    }).appendTo('#card' + imagenActual);
+
+                    //<a class="waves-effect waves-light btn">button</a>
+
+                    //jQuery('<a>', {
+                    //    id: 'AgregaAFavoritos' + imagenActual,
+                    //    class: 'waves-effect waves-light btn tooltipped',
+                    //    style: 'margin-top: 10%;',
+                    //    text: 'Agregar A Favoritos'
+                    //    //onclick: function()
+                    //}).appendTo('#card' + imagenActual);
+
+                    var idDrink = Favoritos[imagenActual - 1].idDrink;
+                    var strDrink = Favoritos[imagenActual - 1].strDrink
+                    var strDrinkThumb = Favoritos[imagenActual - 1].strDrinkThumb;
+
+                    var parametrosParaEliminarDeFavoritos = "'" + imagenActual + "," + idDrink + "," + strDrink.replace("'", "") + "," + strDrinkThumb + "'";
+
+                    //console.log(parametrosParaAgregarAFavoritos);
+
+
+                    //if (Favoritos.some(e => e.idDrink == idDrink)) {
+                    /* Favoritos contiene el elemento buscado */
+
+                    jQuery('<button>', {
+                        id: 'EliminarDeFavoritos' + imagenActual,
+                        class: 'waves-effect waves-light btn tooltipped',
+                        style: 'margin-top: 10%; margin-left: 5%',
+                        text: 'Eliminar De Favoritos',
+                        onclick: 'EliminarDeFavoritos(' + parametrosParaEliminarDeFavoritos + ')'
+                    }).appendTo('#card' + imagenActual);
+
+                    //}
+                    //else {
+
+                    //    jQuery('<button>', {
+                    //        id: 'AgregarAFavoritos' + imagenActual,
+                    //        class: 'waves-effect waves-light btn tooltipped',
+                    //        style: 'margin-top: 10%; margin-left: 5%',
+                    //        text: 'Agregar A Favoritos',
+                    //        onclick: "AgregarAFavoritos(" + parametrosParaAgregarAFavoritos + ")"
+                    //    }).appendTo('#card' + imagenActual);
+                    //}
+                    //}
+                    //else {
+                    //    jQuery('<button>', {
+                    //        id: 'AgregarAFavoritos' + imagenActual,
+                    //        class: 'waves-effect waves-light btn tooltipped',
+                    //        style: 'margin-top: 10%; margin-left: 5%',
+                    //        text: 'Agregar A Favoritos',
+                    //        onclick: "AgregarAFavoritos(" + parametrosParaAgregarAFavoritos + ")"
+                    //    }).appendTo('#card' + imagenActual);
+                    //}
+
+                    //$('<a class="waves-effect waves-light btn>Agrega a favoritos</a>').appendTo("#card" + imagenActual);
+
+                    //<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+
+                    //$("#center").append(txt1, txt2, txt3);
+
+                    //jQuery('<image>', {
+                    //    id: 'image' + i,
+                    //    src: 'https://static.pexels.com/photos/5741/nature-sunset-clouds-lake-large.jpg'
+                    //}).appendTo('#card-image1');
+
+
+                    var imagenActual = (fila - 1) * 4 + imagen;
+
+                    //var img = $('<img id="image" + imagen>'); //Equivalent: $(document.createElement('img'))
+                    var img = $('<img>'); //Equivalent: $(document.createElement('img'))
+                    img.attr('src', strDrinkThumb);
+                    img.appendTo('#card-image' + imagenActual);
+
+
+                    //jQuery('<div>', {
+                    //    id: 'card-content' + imagenActual,
+                    //    class: 'card-content'
+                    //}).appendTo('#card' + imagenActual);
+
+
+                    //var parrafoStrDrink = $("<p></p>").text(strDrink);
+
+                    ////se puede hacer de cualquier forma
+                    ////$("#card-content" + imagenActual).append(parrafoStrDrink);
+                    //$('<p>' + strDrink + '</p>').appendTo("#card-content" + imagenActual);
+
+
+                    jQuery('<div>', {
+                        id: 'card-action' + imagenActual,
+                        class: 'card-action'
+                    }).appendTo('#card' + imagenActual);
+
+
+                    //var Drink = result.data[imagenActual - 1];
+
+                    //console.log(result.data[imagenActual - 1]);
+
+                    //console.log(idDrink);
+
+                    //<a href="#">This is a link</a>
+
+                    //este es el básico:
+                    //$('<a href="@Url.Action("Drink", "CocktailSearch")">' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+                    //$('<a href="@Url.Action("Drink", "CocktailSearch", new { IdDrink = "10007" })">' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+                    //$('<a href="@Url.Action("Drink", "CocktailSearch", new { Drink = "Hola" })">' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+
+                    //var url = "@Url.Action("Drink", "CocktailSearch")/" + idDrink + ">' + strDrink + '</a>').appendTo('#card-action'" + imagenActual);
+
+                    var url = "@Url.Action("Drink", "CocktailSearch")/?IdDrink=" + idDrink;
+
+                    $('<a href=' + url + '>' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+
+                    //var peticionIdDrink = "?/IdDrink=" + idDrink;
+
+                    //url = url.replace("param-id", id)
+                    //    .replace("param-name", name);
+
+                    //$('<a href="@Url.Action("Drink", "CocktailSearch")/" +  + ">' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+                    //$('<a href="@Url.Action("Drink", "CocktailSearch")/" + idDrink + ">' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+                }
+            }
+
+
+
+            if (residuo > 0) {
+
+                var ultimaFila = filas + 1;
+
+                jQuery('<div>', {
+                    id: 'row' + ultimaFila,
+                    class: 'row',
+                    //title: 'now this div has a title!'
+                    //}).appendTo('#containerBodyFromLayout');
+                }).insertBefore('#footer');
+
+
+                for (imagen = 1; imagen <= residuo; imagen++) {
+
+                    var imagenActual = (ultimaFila - 1) * 4 + imagen;
+
+                    jQuery('<div>', {
+                        id: 'cocktail' + imagenActual,
+                        class: 'col s12 m3'
+                    }).appendTo('#row' + fila);
+
+                    jQuery('<div>', {
+                        id: 'card' + imagenActual,
+                        class: 'card small'
+                    }).appendTo('#cocktail' + imagenActual);
+
+                    //var div = $("#card" + imagenActual);
+
+                    //div.attr("style", "height:200px;");
+
+                    jQuery('<div>', {
+                        id: 'card-image' + imagenActual,
+                        class: 'card-image'
+                    }).appendTo('#card' + imagenActual);
+
+                    var idDrink = Favoritos[imagenActual - 1].idDrink;
+                    var strDrink = Favoritos[imagenActual - 1].strDrink
+                    var strDrinkThumb = Favoritos[imagenActual - 1].strDrinkThumb;
+
+                    var parametrosParaEliminarDeFavoritos = "'" + imagenActual + "," + idDrink + "," + strDrink.replace("'", "") + "," + strDrinkThumb + "'";
+
+                    //console.log(parametrosParaAgregarAFavoritos);
+
+                    //if (Favoritos.some(e => e.idDrink == idDrink)) {
+                    /* Favoritos contiene el elemento buscado */
+
+                    jQuery('<button>', {
+                        id: 'EliminarDeFavoritos' + imagenActual,
+                        class: 'waves-effect waves-light btn tooltipped',
+                        style: 'margin-top: 10%; margin-left: 5%',
+                        text: 'Eliminar De Favoritos',
+                        onclick: 'EliminarDeFavoritos(' + parametrosParaEliminarDeFavoritos + ')'
+                    }).appendTo('#card' + imagenActual);
+
+                    //}
+                    //else {
+
+                    //    jQuery('<button>', {
+                    //        id: 'AgregarAFavoritos' + imagenActual,
+                    //        class: 'waves-effect waves-light btn tooltipped',
+                    //        style: 'margin-top: 10%; margin-left: 5%',
+                    //        text: 'Agregar A Favoritos',
+                    //        onclick: "AgregarAFavoritos(" + parametrosParaAgregarAFavoritos + ")"
+                    //    }).appendTo('#card' + imagenActual);
+                    //}
+
+
+                    //$('<a class="waves-effect waves-light btn>Agrega a favoritos</a>').appendTo("#card" + imagenActual);
+
+                    //<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+
+                    //$("#center").append(txt1, txt2, txt3);
+
+                    //jQuery('<image>', {
+                    //    id: 'image' + i,
+                    //    src: 'https://static.pexels.com/photos/5741/nature-sunset-clouds-lake-large.jpg'
+                    //}).appendTo('#card-image1');
+
+                    var imagenActual = (ultimaFila - 1) * 4 + imagen;
+
+
+                    var strImagenThumb = Favoritos[imagenActual - 1].strDrinkThumb;
+                    //var img = $('<img id="image" + imagen>'); //Equivalent: $(document.createElement('img'))
+                    var img = $('<img>'); //Equivalent: $(document.createElement('img'))
+                    img.attr('src', strDrinkThumb);
+                    img.appendTo('#card-image' + imagenActual);
+
+
+                    //jQuery('<div>', {
+                    //    id: 'card-content' + imagenActual,
+                    //    class: 'card-content'
+                    //}).appendTo('#card' + imagenActual);
+
+                    //var parrafoStrDrink = $("<p></p>").text(strDrink);
+
+                    //se puede hacer de cualquier forma
+                    //$("#card-content" + imagenActual).append(parrafoStrDrink);
+                    //$('<p>' + strDrink + '</p>').appendTo("#card-content" + imagenActual);
+
+
+                    jQuery('<div>', {
+                        id: 'card-action' + imagenActual,
+                        class: 'card-action'
+                    }).appendTo('#card' + imagenActual);
+
+
+                    //$('<a href="https://www.yahoo.com">This is a link</a>').appendTo("#card-action" + imagenActual);
+                    //$('<a href="@Url.Action("Drink", "CocktailSearch")">' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+
+                    var url = "@Url.Action("Drink", "CocktailSearch")/?IdDrink=" + idDrink;
+
+                    $('<a href=' + url + '>' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+
+                }
+
+            }
+        }
+
+
+    });
+
+    function AgregarAFavoritos(parametrosParaAgregarAFavoritos) {
+
+        //console.log(parametrosParaAgregarAFavoritos);
+        var parametrosArray = parametrosParaAgregarAFavoritos.split(",");
+        //console.log(parametrosArray);
+
+        var Drink = new Object();
+
+        var imagenActual = parametrosArray[0];
+
+        Drink.idDrink = parametrosArray[1];
+        Drink.strDrink = parametrosArray[2];
+        Drink.strDrinkThumb = parametrosArray[3];
+
+        if (localStorage.Favoritos) {
+            //Si existe en el storage
+            //convert json string to javascript object
+            Favoritos = JSON.parse(localStorage.getItem("Favoritos"))
+
+        } else {
+            var Favoritos = [];
+        }
+
+        Favoritos.push(Drink);
+
+        //converts javascript value to a JSON String
+        localStorage.setItem('Favoritos', JSON.stringify(Favoritos));
+
+
+        $("#AgregarAFavoritos" + imagenActual).text("Eliminar De Favoritos");
+        //$("#AgregarAFavoritos" + imagenActual).html('Eliminar De Favoritos');
+
+        $("#AgregarAFavoritos" + imagenActual).attr("id", "EliminarDeFavoritos" + imagenActual);
+        var parametrosParaEliminarDeFavoritos = "'" + imagenActual + "," + Drink.idDrink + "," + Drink.strDrink.replace("'", "") + "," + Drink.strDrinkThumb + "'";
+
+        $("#EliminarDeFavoritos" + imagenActual).attr("onclick", "EliminarDeFavoritos(" + parametrosParaEliminarDeFavoritos + ")");
+
+    }
+
+    function EliminarDeFavoritos(parametrosParaEliminarDeFavoritos) {
+
+        var parametrosArray = parametrosParaEliminarDeFavoritos.split(",");
+        console.log(parametrosArray);
+
+        var imagenActual = parametrosArray[0];
+
+        var idDrink = parametrosArray[1];
+        var strDrink = parametrosArray[2];
+        var strDrinkThumb = parametrosArray[3];
+
+        //convert json string to javascript object
+        var Favoritos = JSON.parse(localStorage.getItem("Favoritos"))
+
+        Favoritos = Favoritos.filter(function (obj) {
+            return obj.idDrink != idDrink;
+        });
+
+        //converts javascript value to a JSON String
+        localStorage.setItem('Favoritos', JSON.stringify(Favoritos));
+
+        //var nuevosFavoritos = JSON.parse(localStorage.getItem("Favoritos"))
+        //console.log('Nuevos Favoritos');
+        //console.log(nuevosFavoritos);
+
+        //Pendiente esta instrucción:
+        $("#EliminarDeFavoritos" + imagenActual).text("Agregar A Favoritos");
+
+        $("#EliminarDeFavoritos" + imagenActual).attr("id", "AgregarAFavoritos" + imagenActual);
+
+        var parametrosParaAgregarAFavoritos = "'" + imagenActual + "," + idDrink + "," + strDrink.replace("'", "") + "," + strDrinkThumb + "'";
+        $("#AgregarAFavoritos" + imagenActual).attr("onclick", "AgregarAFavoritos(" + parametrosParaAgregarAFavoritos + ")");
+
+        //$("#AgregarAFavoritos" + imagenActual).html('Eliminar De Favoritos');
+
+        
+
+    }
+
+</script>

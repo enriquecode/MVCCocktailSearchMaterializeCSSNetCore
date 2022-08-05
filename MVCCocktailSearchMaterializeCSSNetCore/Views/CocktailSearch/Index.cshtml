@@ -1,0 +1,619 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cocktail Search</h2>
+
+<table width="350" align="center">
+    <tbody>
+        <tr>
+            <td>
+                <form class="navbar-form" autocomplete="off">
+                    <div class="input-group">
+                        <input type="text" name="s" id="txtCocktailToSearch" class="form-control" autocomplete="off" placeholder="Search for a Cocktail...">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" onclick="BuscarCocktelesPorTexto()"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+@*se pudo haber echo con un ciclo en la lista de Drinks, pero mejor con puro jquery:*@
+@*@model List<MVCCocktailSearchMaterializeCSSNetCore.Models.Drink>*@
+
+
+@*@foreach (var drink in Model)
+    {
+        // Model[0];
+    }*@
+
+@*<section id="feature">
+        <div class="container">
+            <div class="center">
+                <h1>Browse Cocktails<br><br></h1>
+                <div class="row"><div class="col-sm-3"><a href="/drink/11118"></a><a href="drink/11118-Blue-Margarita"><img src="https://www.thecocktaildb.com/images/media/drink/bry4qh1582751040.jpg" width="200"> <br>Blue Margarita</a></div><div class="col-sm-3"><a href="/drink/178332"></a><a href="drink/178332-Smashed-Watermelon-Margarita"><img src="https://www.thecocktaildb.com/images/media/drink/dztcv51598717861.jpg" width="200"> <br>Smashed Watermelon Margarita</a></div><div class="col-sm-3"><a href="/drink/12322"></a><a href="drink/12322-Strawberry-Margarita"><img src="https://www.thecocktaildb.com/images/media/drink/tqyrpw1439905311.jpg" width="200"> <br>Strawberry Margarita</a></div><div class="col-sm-3"><a href="/drink/11007"></a><a href="drink/11007-Margarita"><img src="https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg" width="200"> <br>Margarita</a></div></div><div class="row"><div class="col-sm-3"><a href="/drink/16158"></a><a href="drink/16158-Whitecap-Margarita"><img src="https://www.thecocktaildb.com/images/media/drink/srpxxp1441209622.jpg" width="200"> <br>Whitecap Margarita</a></div><div class="col-sm-3"><a href="/drink/17216"></a><a href="drink/17216-Tommys-Margarita"><img src="https://www.thecocktaildb.com/images/media/drink/loezxn1504373874.jpg" width="200"> <br>Tommy's Margarita</a></div>            </div>
+
+                <div class="center">
+                    <br>
+                    <h3>Browse Drinks<br></h3><h2>
+                        <a href="/browse.php?b=a">A</a> / <a href="/browse.php?b=b">B</a> / <a href="/browse.php?b=c">C</a> / <a href="/browse.php?b=d">D</a> / <a href="/browse.php?b=e">E</a> / <a href="/browse.php?b=f">F</a> / <a href="/browse.php?b=g">G</a> / <a href="/browse.php?b=h">H</a> / <a href="/browse.php?b=i">I</a> / <a href="/browse.php?b=j">J</a> / <a href="/browse.php?b=k">K</a> / <a href="/browse.php?b=l">L</a> / <a href="/browse.php?b=m">M</a> / <a href="/browse.php?b=n">N</a> / <a href="/browse.php?b=o">O</a> / <a href="/browse.php?b=p">P</a> / <a href="/browse.php?b=q">Q</a> / <a href="/browse.php?b=r">R</a> / <a href="/browse.php?b=s">S</a> / <a href="/browse.php?b=t">T</a> / <a href="/browse.php?b=u">U</a> / <a href="/browse.php?b=v">V</a> / <a href="/browse.php?b=w">W</a> / <a href="/browse.php?b=x">X</a> / <a href="/browse.php?b=y">Y</a> / <a href="/browse.php?b=z">Z</a>
+                    </h2>
+
+                </div>
+            </div>
+        </div>
+    </section>*@
+
+@*<section id="feature">
+        <div class="container" id="container">
+            <div class="center" id="center">
+                <h1>Browse Cocktails<br><br></h1>
+            </div>
+        </div>
+    </section>*@
+
+@*<div class="row">*@
+@*<div class="col s12 m4 l4">
+        <h4>Basic card</h4>
+        <div class="card  light-green darken-3">
+            <div class="card-content white-text">
+                <span class="card-title">Card Title</span>
+                <p>
+                    I am a very simple card. I am good at containing small bits of information.
+                    I am convenient because I require little markup to use effectively.
+                </p>
+            </div>
+            <div class="card-action">
+                <a href="#">This is a link</a>
+                <a href="#">This is a link</a>
+            </div>
+        </div>
+    </div>*@
+<!--col-->
+@*<div class="col s12 m3 l3">
+        <h4>Image card</h4>
+        <div class="card small">
+            <div class="card-image">
+                <img src="https://static.pexels.com/photos/5741/nature-sunset-clouds-lake-large.jpg">
+                <span class="card-title">Card Title</span>
+            </div>
+            <div class="card-content">
+                <p>
+                    I am a very simple card. I am good at containing small bits of information.
+                </p>
+            </div>
+            <div class="card-action">
+                <a href="#">This is a link</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 m3 l3">
+        <h4>Image card</h4>
+        <div class="card small">
+            <div class="card-image">
+                <img src="https://static.pexels.com/photos/5741/nature-sunset-clouds-lake-large.jpg">
+                <span class="card-title">Card Title</span>
+            </div>
+            <div class="card-content">
+                <p>
+                    I am a very simple card. I am good at containing small bits of information.
+                </p>
+            </div>
+            <div class="card-action">
+                <a href="#">This is a link</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 m3 l3">
+        <h4>Image card</h4>
+        <div class="card small">
+            <div class="card-image">
+                <img src="https://static.pexels.com/photos/5741/nature-sunset-clouds-lake-large.jpg">
+                <span class="card-title">Card Title</span>
+            </div>
+            <div class="card-content">
+                <p>
+                    I am a very simple card. I am good at containing small bits of information.
+                </p>
+            </div>
+            <div class="card-action">
+                <a href="#">This is a link</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 m3 l3">
+        <h4>Image card</h4>
+        <div class="card small">
+            <div class="card-image">
+                <img src="https://static.pexels.com/photos/5741/nature-sunset-clouds-lake-large.jpg">
+                <span class="card-title">Card Title</span>
+            </div>
+            <div class="card-content">
+                <p>
+                    I am a very simple card. I am good at containing small bits of information.
+                </p>
+            </div>
+            <div class="card-action">
+                <a href="#">This is a link</a>
+            </div>
+        </div>
+    </div>*@
+
+<!--col-->
+@*<div class="col s12 m4 l4">
+        <h4>Card Reveal</h4>
+        <div class="card small">
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src="http://www.gratisography.com/pictures/215_1.jpg">
+            </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+                <p><a href="#">This is a link</a></p>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            </div>
+        </div>
+    </div>*@
+
+
+@*</div><!--row-->*@
+
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+        //$.ajax({
+        //    type: 'GET',
+        //    url: '/CocktailSearch/ObtenerCoctelesPopulares',
+        //    success: function (result) {
+        //        console.log(result.data);
+        //    }
+        //});
+
+    });
+
+    function BuscarCocktelesPorTexto() {
+
+        var texto = $("#txtCocktailToSearch").val();
+        if (texto.length > 0) {
+
+            $("div").remove(".row");
+
+            $.ajax({
+                type: 'GET',
+                url: '/CocktailSearch/BuscarCocktelesPorTexto',
+                data: { texto: texto },
+                success: function (result) {
+                    console.log(result.data);
+
+                    //localStorage.clear();
+
+                    var Favoritos = [];
+
+                    if (localStorage.Favoritos) {
+                        //Si existe en el storage
+                        //convert json string to javascript object
+                        Favoritos = JSON.parse(localStorage.getItem("Favoritos"))
+                    }
+
+                    //console.log('Ya existen, estos favoritos');
+                    //console.log(Favoritos);
+
+                    var filas = Math.floor(result.data.length / 4);
+                    var residuo = result.data.length % 4;
+
+                    for (fila = 1; fila <= filas; fila++) {
+
+                        jQuery('<div>', {
+                            id: 'row' + fila,
+                            class: 'row',
+                            //title: 'now this div has a title!'
+                            //   }).appendTo('#containerBodyFromLayout');
+                        }).insertBefore('#footer');
+
+
+                        for (imagen = 1; imagen <= 4; imagen++) {
+
+                            var imagenActual = (fila - 1) * 4 + imagen;
+
+                            jQuery('<div>', {
+                                id: 'cocktail' + imagenActual,
+                                class: 'col s12 m3'
+                            }).appendTo('#row' + fila);
+
+                            jQuery('<div>', {
+                                id: 'card' + imagenActual,
+                                class: 'card small'
+                            }).appendTo('#cocktail' + imagenActual);
+                            //$("#center").append(txt1, txt2, txt3);
+
+                            //var div = $("#card" + imagenActual);
+
+                            //div.attr("style", "height:200px;");
+
+                            jQuery('<div>', {
+                                id: 'card-image' + imagenActual,
+                                class: 'card-image'
+                            }).appendTo('#card' + imagenActual);
+
+                            //<a class="waves-effect waves-light btn">button</a>
+
+                            //jQuery('<a>', {
+                            //    id: 'AgregaAFavoritos' + imagenActual,
+                            //    class: 'waves-effect waves-light btn tooltipped',
+                            //    style: 'margin-top: 10%;',
+                            //    text: 'Agregar A Favoritos'
+                            //    //onclick: function()
+                            //}).appendTo('#card' + imagenActual);
+
+                            var idDrink = result.data[imagenActual - 1].idDrink;
+                            var strDrink = result.data[imagenActual - 1].strDrink
+                            var strDrinkThumb = result.data[imagenActual - 1].strDrinkThumb;
+
+
+                            var parametrosParaAgregarAFavoritos = "'" + imagenActual + "," + idDrink + "," + strDrink.replace("'", "") + "," + strDrinkThumb + "'";
+                            var parametrosParaEliminarDeFavoritos = "'" + imagenActual + "," + idDrink + "," + strDrink.replace("'", "") + "," + strDrinkThumb + "'";
+                            console.log(parametrosParaAgregarAFavoritos);
+
+                            if (Favoritos.length > 0) {
+                                if (Favoritos.some(e => e.idDrink == idDrink)) {
+                                    /* Favoritos contiene el elemento buscado */
+
+                                    jQuery('<button>', {
+                                        id: 'EliminarDeFavoritos' + imagenActual,
+                                        class: 'waves-effect waves-light btn tooltipped',
+                                        style: 'margin-top: 10%; margin-left: 5%',
+                                        text: 'Eliminar De Favoritos',
+                                        onclick: 'EliminarDeFavoritos(' + parametrosParaEliminarDeFavoritos + ')'
+                                    }).appendTo('#card' + imagenActual);
+
+                                }
+                                else {
+
+                                    jQuery('<button>', {
+                                        id: 'AgregarAFavoritos' + imagenActual,
+                                        class: 'waves-effect waves-light btn tooltipped',
+                                        style: 'margin-top: 10%; margin-left: 5%',
+                                        text: 'Agregar A Favoritos',
+                                        onclick: "AgregarAFavoritos(" + parametrosParaAgregarAFavoritos + ")"
+                                    }).appendTo('#card' + imagenActual);
+                                }
+                            }
+                            else {
+                                jQuery('<button>', {
+                                    id: 'AgregarAFavoritos' + imagenActual,
+                                    class: 'waves-effect waves-light btn tooltipped',
+                                    style: 'margin-top: 10%; margin-left: 5%',
+                                    text: 'Agregar A Favoritos',
+                                    onclick: "AgregarAFavoritos(" + parametrosParaAgregarAFavoritos + ")"
+                                }).appendTo('#card' + imagenActual);
+                            }
+
+                            //$('<a class="waves-effect waves-light btn>Agrega a favoritos</a>').appendTo("#card" + imagenActual);
+
+                            //<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+
+                            //$("#center").append(txt1, txt2, txt3);
+
+                            //jQuery('<image>', {
+                            //    id: 'image' + i,
+                            //    src: 'https://static.pexels.com/photos/5741/nature-sunset-clouds-lake-large.jpg'
+                            //}).appendTo('#card-image1');
+
+
+                            var imagenActual = (fila - 1) * 4 + imagen;
+
+                            //var img = $('<img id="image" + imagen>'); //Equivalent: $(document.createElement('img'))
+                            var img = $('<img>'); //Equivalent: $(document.createElement('img'))
+                            img.attr('src', strDrinkThumb);
+                            img.appendTo('#card-image' + imagenActual);
+
+
+                            //jQuery('<div>', {
+                            //    id: 'card-content' + imagenActual,
+                            //    class: 'card-content'
+                            //}).appendTo('#card' + imagenActual);
+
+
+                            //var parrafoStrDrink = $("<p></p>").text(strDrink);
+
+                            ////se puede hacer de cualquier forma
+                            ////$("#card-content" + imagenActual).append(parrafoStrDrink);
+                            //$('<p>' + strDrink + '</p>').appendTo("#card-content" + imagenActual);
+
+
+                            jQuery('<div>', {
+                                id: 'card-action' + imagenActual,
+                                class: 'card-action'
+                            }).appendTo('#card' + imagenActual);
+
+
+                            //var Drink = result.data[imagenActual - 1];
+
+                            //console.log(result.data[imagenActual - 1]);
+
+                            //console.log(idDrink);
+
+                            //<a href="#">This is a link</a>
+
+                            //este es el básico:
+                            //$('<a href="@Url.Action("Drink", "CocktailSearch")">' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+                            //$('<a href="@Url.Action("Drink", "CocktailSearch", new { IdDrink = "10007" })">' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+                            //$('<a href="@Url.Action("Drink", "CocktailSearch", new { Drink = "Hola" })">' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+
+                            //var url = "@Url.Action("Drink", "CocktailSearch")/" + idDrink + ">' + strDrink + '</a>').appendTo('#card-action'" + imagenActual);
+
+                            var url = "@Url.Action("Drink", "CocktailSearch")/?IdDrink=" + idDrink;
+
+                            $('<a href=' + url + '>' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+
+                            //var peticionIdDrink = "?/IdDrink=" + idDrink;
+
+                            //url = url.replace("param-id", id)
+                            //    .replace("param-name", name);
+
+            //$('<a href="@Url.Action("Drink", "CocktailSearch")/" +  + ">' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+                            //$('<a href="@Url.Action("Drink", "CocktailSearch")/" + idDrink + ">' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+        }
+        }
+
+
+
+                    if (residuo > 0) {
+
+                        var ultimaFila = filas + 1;
+
+                        jQuery('<div>', {
+                            id: 'row' + ultimaFila,
+                            class: 'row',
+                            //title: 'now this div has a title!'
+                        //}).appendTo('#containerBodyFromLayout');
+                        }).insertBefore('#footer');
+
+
+                        for (imagen = 1; imagen <= residuo; imagen++) {
+
+                            var imagenActual = (ultimaFila - 1) * 4 + imagen;
+
+                            jQuery('<div>', {
+                                id: 'cocktail' + imagenActual,
+                                class: 'col s12 m3'
+                            }).appendTo('#row' + fila);
+
+                            jQuery('<div>', {
+                                id: 'card' + imagenActual,
+                                class: 'card small'
+                            }).appendTo('#cocktail' + imagenActual);
+
+                            //var div = $("#card" + imagenActual);
+
+                            //div.attr("style", "height:200px;");
+
+                            jQuery('<div>', {
+                                id: 'card-image' + imagenActual,
+                                class: 'card-image'
+                            }).appendTo('#card' + imagenActual);
+
+                            var idDrink = result.data[imagenActual - 1].idDrink;
+                            var strDrink = result.data[imagenActual - 1].strDrink
+                            var strDrinkThumb = result.data[imagenActual - 1].strDrinkThumb;
+
+
+                            var parametrosParaAgregarAFavoritos = "'" + imagenActual + "," + idDrink + "," + strDrink.replace("'", "") + "," + strDrinkThumb + "'";
+                            var parametrosParaEliminarDeFavoritos = "'" + imagenActual + "," + idDrink + "," + strDrink.replace("'", "") + "," + strDrinkThumb + "'";
+                            console.log(parametrosParaAgregarAFavoritos);
+
+                            if (Favoritos.length > 0) {
+                                if (Favoritos.some(e => e.idDrink == idDrink)) {
+                                    /* Favoritos contiene el elemento buscado */
+
+                                    jQuery('<button>', {
+                                        id: 'EliminarDeFavoritos' + imagenActual,
+                                        class: 'waves-effect waves-light btn tooltipped',
+                                        style: 'margin-top: 10%; margin-left: 5%',
+                                        text: 'Eliminar De Favoritos',
+                                        onclick: 'EliminarDeFavoritos(' + parametrosParaEliminarDeFavoritos + ')'
+                                    }).appendTo('#card' + imagenActual);
+
+                                }
+                                else {
+
+                                    jQuery('<button>', {
+                                        id: 'AgregarAFavoritos' + imagenActual,
+                                        class: 'waves-effect waves-light btn tooltipped',
+                                        style: 'margin-top: 10%; margin-left: 5%',
+                                        text: 'Agregar A Favoritos',
+                                        onclick: "AgregarAFavoritos(" + parametrosParaAgregarAFavoritos + ")"
+                                    }).appendTo('#card' + imagenActual);
+                                }
+                            }
+                            else {
+                                jQuery('<button>', {
+                                    id: 'AgregarAFavoritos' + imagenActual,
+                                    class: 'waves-effect waves-light btn tooltipped',
+                                    style: 'margin-top: 10%; margin-left: 5%',
+                                    text: 'Agregar A Favoritos',
+                                    onclick: "AgregarAFavoritos(" + parametrosParaAgregarAFavoritos + ")"
+                                }).appendTo('#card' + imagenActual);
+                            }
+
+                            //$('<a class="waves-effect waves-light btn>Agrega a favoritos</a>').appendTo("#card" + imagenActual);
+
+                            //<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+
+                            //$("#center").append(txt1, txt2, txt3);
+
+                            //jQuery('<image>', {
+                            //    id: 'image' + i,
+                            //    src: 'https://static.pexels.com/photos/5741/nature-sunset-clouds-lake-large.jpg'
+                            //}).appendTo('#card-image1');
+
+                            var imagenActual = (ultimaFila - 1) * 4 + imagen;
+
+
+                            //var strImagenThumb = result.data[imagenActual - 1].strDrinkThumb;
+                            //var img = $('<img id="image" + imagen>'); //Equivalent: $(document.createElement('img'))
+                            var img = $('<img>'); //Equivalent: $(document.createElement('img'))
+                            img.attr('src', strDrinkThumb);
+                            img.appendTo('#card-image' + imagenActual);
+
+
+                            //jQuery('<div>', {
+                            //    id: 'card-content' + imagenActual,
+                            //    class: 'card-content'
+                            //}).appendTo('#card' + imagenActual);
+
+                            //var parrafoStrDrink = $("<p></p>").text(strDrink);
+
+                            //se puede hacer de cualquier forma
+                            //$("#card-content" + imagenActual).append(parrafoStrDrink);
+                            //$('<p>' + strDrink + '</p>').appendTo("#card-content" + imagenActual);
+
+
+                            jQuery('<div>', {
+                                id: 'card-action' + imagenActual,
+                                class: 'card-action'
+                            }).appendTo('#card' + imagenActual);
+
+
+                            //$('<a href="https://www.yahoo.com">This is a link</a>').appendTo("#card-action" + imagenActual);
+                            //$('<a href="@Url.Action("Drink", "CocktailSearch")">' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+
+                             var url = "@Url.Action("Drink", "CocktailSearch")/?IdDrink=" + idDrink;
+
+                            $('<a href=' + url + '>' + strDrink + '</a>').appendTo("#card-action" + imagenActual);
+
+                        }
+
+                    }
+
+                }
+            });
+        }
+    }
+
+    function AgregarAFavoritos(parametrosParaAgregarAFavoritos) {
+        console.log(parametrosParaAgregarAFavoritos);
+        var parametrosArray = parametrosParaAgregarAFavoritos.split(",");
+        console.log(parametrosArray);
+
+        var Drink = new Object();
+
+        var imagenActual = parametrosArray[0];
+
+        Drink.idDrink = parametrosArray[1];
+        Drink.strDrink = parametrosArray[2];
+        Drink.strDrinkThumb = parametrosArray[3];
+
+        if (localStorage.Favoritos) {
+            //Si existe en el storage
+            //convert json string to javascript object
+            Favoritos = JSON.parse(localStorage.getItem("Favoritos"))
+
+        } else {
+            var Favoritos = [];
+        }
+
+        Favoritos.push(Drink);
+
+        //converts javascript value to a JSON String
+        localStorage.setItem('Favoritos', JSON.stringify(Favoritos));
+
+
+        $("#AgregarAFavoritos" + imagenActual).text("Eliminar De Favoritos");
+        //$("#AgregarAFavoritos" + imagenActual).html('Eliminar De Favoritos');
+
+        $("#AgregarAFavoritos" + imagenActual).attr("id", "EliminarDeFavoritos" + imagenActual);
+        var parametrosParaEliminarDeFavoritos = "'" + imagenActual + "," + Drink.idDrink + "," + Drink.strDrink.replace("'", "") + "," + Drink.strDrinkThumb + "'";
+
+        $("#EliminarDeFavoritos" + imagenActual).attr("onclick", "EliminarDeFavoritos(" + parametrosParaEliminarDeFavoritos + ")");
+       
+
+
+        //$.ajax({
+        //    type: 'GET',
+        //    url: '/CocktailSearch/ObtenerDetallesCocktailById',
+        //    data: { IdDrink: idDrink },
+        //    success: function (result) {
+        //        console.log(result.data);
+        //    }
+        //});
+
+    }
+
+    function EliminarDeFavoritos(parametrosParaEliminarDeFavoritos) {
+
+        var parametrosArray = parametrosParaEliminarDeFavoritos.split(",");
+        console.log(parametrosArray);
+
+        var imagenActual = parametrosArray[0];
+
+        var idDrink = parametrosArray[1];
+        var strDrink = parametrosArray[2];
+        var strDrinkThumb = parametrosArray[3];
+
+        //convert json string to javascript object
+        var Favoritos = JSON.parse(localStorage.getItem("Favoritos"))
+
+        Favoritos = Favoritos.filter(function (obj) {
+            return obj.idDrink != idDrink;
+        });
+
+        //converts javascript value to a JSON String
+        localStorage.setItem('Favoritos', JSON.stringify(Favoritos));
+
+        var nuevosFavoritos = JSON.parse(localStorage.getItem("Favoritos"))
+        //console.log('Nuevos Favoritos');
+        //console.log(nuevosFavoritos);
+
+        //Pendiente esta instrucción:
+        $("#EliminarDeFavoritos" + imagenActual).text("Agregar A Favoritos");
+
+        $("#EliminarDeFavoritos" + imagenActual).attr("id", "AgregarAFavoritos" + imagenActual);
+
+        var parametrosParaAgregarAFavoritos = "'" + imagenActual + "," + idDrink + "," + strDrink.replace("'", "") + "," + strDrinkThumb + "'";
+        $("#AgregarAFavoritos" + imagenActual).attr("onclick", "AgregarAFavoritos(" + parametrosParaAgregarAFavoritos + ")");
+
+        //$("#AgregarAFavoritos" + imagenActual).html('Eliminar De Favoritos');
+
+
+        //$.ajax({
+        //    type: 'GET',
+        //    url: '/CocktailSearch/ObtenerDetallesCocktailById',
+        //    data: { IdDrink: idDrink },
+        //    success: function (result) {
+        //        console.log(result.data);
+        //    }
+        //});
+
+    }
+
+    $('.tooltipped-click').click(function () {
+        alert('hola');
+       // $(this).tooltip();
+        //$(this).tooltip('open');
+    });
+
+</script>
